@@ -1,0 +1,60 @@
+{
+  "name": "sd-0x-project-react-context-hooks-starwars-datatable-filters",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": "16 || 18"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "!src/index.js"
+    ]
+  },
+  "scripts": {
+    "cy": "env CY_CLI=true cypress run",
+    "cy:open": "cypress open --e2e --browser chrome",
+    "start": "env ESLINT_NO_DEV_ERRORS=true react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "test-coverage": "react-scripts test --coverage --watchAll=false",
+    "eject": "react-scripts eject",
+    "lint:styles": "npx stylelint '**/*.css'",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js,.jsx"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@sheerun/mutationobserver-shim": "0.3.3",
+    "@trybe/eslint-config-frontend": "^1.7.1",
+    "cypress": "^10.11.0",
+    "cypress-multi-reporters": "^1.6.2",
+    "mocha": "^10.2.0",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.2.2",
+    "mochawesome-report-generator": "^6.2.0",
+    "stylelint": "14.16.1",
+    "stylelint-order": "5.0.0"
+  }
+}
