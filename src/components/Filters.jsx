@@ -1,4 +1,4 @@
-import React, { useContext, useCallback, useReducer } from 'react';
+import React, { useContext, useCallback, useReducer, useEffect } from 'react';
 import Context from '../context/Context';
 
 function Filters() {
@@ -26,6 +26,10 @@ function Filters() {
   }, []);
 
   const removeAll = useCallback(() => removeNumericFilter('All'), [removeNumericFilter]);
+
+  useEffect(() => {
+    setNumericFilter({ column: columnOpt[0] });
+  }, [columnOpt]);
 
   return (
     <div className="containerFilters">
