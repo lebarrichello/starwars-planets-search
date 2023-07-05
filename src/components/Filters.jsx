@@ -88,6 +88,43 @@ function Filters() {
         >
           Remover Filtros
         </button>
+        <select
+          name="column"
+          data-testid="column-sort"
+        >
+          <option value="">Ordenar</option>
+          <option value="population">Population</option>
+          <option value="orbital_period">Orbital Period</option>
+          <option value="diameter">Diameter</option>
+          <option value="rotation_period">Rotation Period</option>
+          <option value="surface_water">Surface Water</option>
+        </select>
+
+        <label htmlFor="column-sort-input-asc">
+          <input
+            type="radio"
+            name="sort"
+            value="ASC"
+            data-testid="column-sort-input-asc"
+          />
+          Ascendente
+        </label>
+        <label htmlFor="column-sort-input-desc">
+          <input
+            type="radio"
+            name="sort"
+            value="DESC"
+            data-testid="column-sort-input-desc"
+
+          />
+          Descendente
+        </label>
+        <button
+          type="button"
+          data-testid="column-sort-button"
+        >
+          Ordenar
+        </button>
       </div>
     </div>
   );
