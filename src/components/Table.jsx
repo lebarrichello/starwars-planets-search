@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import Context from '../context/Context';
+import Filters from './Filters';
 
 function Table() {
   const { tbColumns } = useContext(Context);
@@ -7,6 +8,7 @@ function Table() {
 
   return (
     <div className="containerTable">
+      <Filters />
       <div>
         <table className="rTable">
           <thead>
