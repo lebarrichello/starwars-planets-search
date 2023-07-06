@@ -208,4 +208,11 @@ describe('Testes para o componente Filters', () => {
       expect(planetName).toHaveTextContent(orderedPlanetNames[index].name);
     })
   })
+
+  it('Verifica se ao clicar no botao de remover filtros , remove todos os filtros aplicados', () =>{
+
+    const btnDeleteAll = screen.getByTestId('button-remove-filters');
+    userEvent.click(btnDeleteAll);
+    expect(screen.queryAllByTestId('filter')).toHaveLength(0);
+  })
 });
