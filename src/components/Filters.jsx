@@ -31,7 +31,8 @@ function Filters() {
     setNumericFilter({ column: columnOpt[0] });
   }, [columnOpt]);
 
-  const [sortOptions, setSortOptions] = useReducer((state, newState) => ({ ...state, ...newState }), {
+  const [sortOptions, setSortOptions] = useReducer((state, newState) => ({
+    ...state, ...newState }), {
     column: 'population',
     order: 'ASC',
   });
@@ -109,7 +110,6 @@ function Filters() {
           value={ column }
           onChange={ handleChangeASCDESC }
         >
-          <option value={ order } onChange={ handleChange } selected>Ordenar</option>
           <option value="population">Population</option>
           <option value="orbital_period">Orbital Period</option>
           <option value="diameter">Diameter</option>
@@ -134,7 +134,7 @@ function Filters() {
             name="order"
             value="DESC"
             data-testid="column-sort-input-desc"
-            checked={order === 'DESC'}
+            checked={ order === 'DESC' }
             onChange={ handleChangeASCDESC }
           />
           Descendente
