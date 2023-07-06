@@ -3,7 +3,7 @@ import Context from '../context/Context';
 
 function Filters() {
   const { filters: { filterByName }, setFilterByName,
-    addNumericFilter, removeNumericFilter, columnOpt } = useContext(Context);
+    addNumericFilter, removeNumericFilter, columnOpt, sortPlanets } = useContext(Context);
 
   const handleChange = useCallback(({ target: { value } }) => {
     setFilterByName(value);
@@ -30,6 +30,21 @@ function Filters() {
   useEffect(() => {
     setNumericFilter({ column: columnOpt[0] });
   }, [columnOpt]);
+
+  const [sortOptions, setSortOptions] = useReducer((state, newState) => ({ ...state, ...newState }), {
+    column: 'population',
+    order: 'ASC',
+  });
+
+  const { column, order } = sortOptions;
+
+  const handleChangeASCDESC = useCallback(({ target: { name, value } }) => {
+    setSortOptions({ [name]: value });
+  }, []);
+
+  const handleSort = useCallback(() => {
+    sortPlanets(sortOptions);
+  }, [sortOptions, sortPlanets]);
 
   return (
     <div className="containerFilters">
@@ -91,8 +106,10 @@ function Filters() {
         <select
           name="column"
           data-testid="column-sort"
+          value={ column }
+          onChange={ handleChangeASCDESC }
         >
-          <option value="">Ordenar</option>
+          <option value={ order } onChange={ handleChange } selected>Ordenar</option>
           <option value="population">Population</option>
           <option value="orbital_period">Orbital Period</option>
           <option value="diameter">Diameter</option>
@@ -103,25 +120,29 @@ function Filters() {
         <label htmlFor="column-sort-input-asc">
           <input
             type="radio"
-            name="sort"
+            name="order"
             value="ASC"
             data-testid="column-sort-input-asc"
+            checked={ order === 'ASC' }
+            onChange={ handleChangeASCDESC }
           />
           Ascendente
         </label>
         <label htmlFor="column-sort-input-desc">
           <input
             type="radio"
-            name="sort"
+            name="order"
             value="DESC"
             data-testid="column-sort-input-desc"
-
+            checked={order === 'DESC'}
+            onChange={ handleChangeASCDESC }
           />
           Descendente
         </label>
         <button
           type="button"
           data-testid="column-sort-button"
+          onClick={ handleSort }
         >
           Ordenar
         </button>
