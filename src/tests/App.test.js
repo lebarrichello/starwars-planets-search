@@ -162,4 +162,50 @@ describe('Testes para o componente Filters', () => {
       expect(sortBy.DESC(1, 2)).toBe(1);
     });
   });
+
+
+  it('Verifica ordenacao ASCENDENTE', () => {
+    const selectColumnSort = screen.getByTestId('column-sort');
+    const radioSortAsc = screen.getByTestId('column-sort-input-asc');
+    const btnSort = screen.getByTestId('column-sort-button');
+    
+    userEvent.selectOptions(selectColumnSort, 'population');
+    userEvent.click(radioSortAsc);
+    userEvent.click(btnSort);
+
+    const allPlanetNames = screen.getAllByTestId('planet-name');
+
+  
+    const orderedPlanetNames = mockData.results.sort((a, b) => {
+      if (a.population === 'unknown') return 1; 
+      if (b.population === 'unknown') return -1; 
+      return Number(a.population) - Number(b.population); 
+    })
+
+    allPlanetNames.forEach((planetName, index) => {
+      expect(planetName).toHaveTextContent(orderedPlanetNames[index].name);
+    })
+  })
+
+  it('Verifica ordenacao DESCENDENTE', () => {
+    const selectColumnSort = screen.getByTestId('column-sort');
+    const radioSortDesc = screen.getByTestId('column-sort-input-desc');
+    const btnSort = screen.getByTestId('column-sort-button');
+    
+    userEvent.selectOptions(selectColumnSort, 'population');
+    userEvent.click(radioSortDesc);
+    userEvent.click(btnSort);
+
+    const allPlanetNames = screen.getAllByTestId('planet-name');
+
+    const orderedPlanetNames = mockData.results.sort((a, b) => {
+      if (a.population === 'unknown') return 1;
+      if (b.population === 'unknown') return -1;
+      return Number(b.population) - Number(a.population);
+    })
+
+    allPlanetNames.forEach((planetName, index) => {
+      expect(planetName).toHaveTextContent(orderedPlanetNames[index].name);
+    })
+  })
 });
