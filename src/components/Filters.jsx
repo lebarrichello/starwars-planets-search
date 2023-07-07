@@ -1,22 +1,16 @@
 import React, { useContext, useCallback, useReducer, useEffect } from 'react';
 import Context from '../context/Context';
-import AppliedFilters from './AppliedFilters';
+import './teste.css';
 
 function Filters() {
-  const { filters: { filterByName }, setFilterByName,
-    addNumericFilter, columnOpt, sortPlanets } = useContext(Context);
-
-  const {
-    filters: { numericFilters = [] },
-    removeNumericFilter,
-  } = useContext(Context);
-  console.log(numericFilters);
+  const { filters: { filterByName, numFilters = [] }, setFilterByName,
+    addNumericFilter, columnOpt, sortPlanets, removeNumericFilter } = useContext(Context);
 
   const handleChange = useCallback(({ target: { value } }) => {
     setFilterByName(value);
   }, [setFilterByName]);
 
-  const [numFilters, setNumericFilter] = useReducer((state, newState) => ({
+  const [numFiltersState, setNumericFilter] = useReducer((state, newState) => ({
     ...state, ...newState,
   }), {
     column: 'population',
@@ -25,21 +19,20 @@ function Filters() {
   });
 
   const addNumFilterContext = useCallback(() => {
-    addNumericFilter(numFilters);
-  }, [addNumericFilter, numFilters]);
+    addNumericFilter(numFiltersState);
+  }, [addNumericFilter, numFiltersState]);
 
   const handleChangeNumFilter = useCallback(({ target: { name, value } }) => {
     setNumericFilter({ [name]: value });
   }, []);
-
-  const removeAll = useCallback(() => removeNumericFilter('All'), [removeNumericFilter]);
 
   useEffect(() => {
     setNumericFilter({ column: columnOpt[0] });
   }, [columnOpt]);
 
   const [sortOptions, setSortOptions] = useReducer((state, newState) => ({
-    ...state, ...newState }), {
+    ...state, ...newState,
+  }), {
     column: 'population',
     order: 'ASC',
   });
@@ -53,6 +46,15 @@ function Filters() {
   const handleSort = useCallback(() => {
     sortPlanets(sortOptions);
   }, [sortOptions, sortPlanets]);
+
+  const removeAll = useCallback(() => removeNumericFilter('All'), [removeNumericFilter]);
+
+  const handleRemoveFilter = useCallback((index) => {
+    const cloneArray = [...numFiltersState];
+    console.log(numFiltersState);
+    cloneArray.splice(index, 1);
+    removeNumericFilter(cloneArray);
+  }, [numFiltersState, removeNumericFilter]);
 
   return (
     <div className="containerFilters">
@@ -71,7 +73,7 @@ function Filters() {
           data-testid="column-filter"
           name="column"
           onChange={ handleChangeNumFilter }
-          value={ numFilters.column }
+          value={ numFiltersState.column }
         >
           {columnOpt.map((option) => (
             <option key={ option } value={ option }>{option}</option>
@@ -83,7 +85,7 @@ function Filters() {
           data-testid="comparison-filter"
           name="comparison"
           onChange={ handleChangeNumFilter }
-          value={ numFilters.comparison }
+          value={ numFiltersState.comparison }
         >
           <option value="maior que">maior que</option>
           <option value="menor que">menor que</option>
@@ -95,7 +97,7 @@ function Filters() {
           type="number"
           data-testid="value-filter"
           onChange={ handleChangeNumFilter }
-          value={ numFilters.value }
+          value={ numFiltersState.value }
         />
         <button
           type="button"
@@ -154,10 +156,20 @@ function Filters() {
           Ordenar
         </button>
       </div>
-      {numericFilters.map((filter) => (
-        <div key={ filter.column }>
-          <AppliedFilters filter={ filter } key={ filter.column } />
-        </div>))}
+      <div className="cor">
+        <span>cade a bagaca</span>
+        {numFilters.map((filter, index) => (
+          <div key={ index } data-testid="filter">
+            <span>
+              {filter.column}
+              {filter.comparison}
+              {filter.value}
+            </span>
+            <button onClick={ () => handleRemoveFilter(index) }>𝙭</button>
+          </div>
+        ))}
+      </div>
+
     </div>
   );
 }

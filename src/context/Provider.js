@@ -56,23 +56,30 @@ function Provider({ children }) {
     setData(sortedData);
   }, [data]);
 
-  const addNumericFilter = useCallback((filter) => {
-    setColumnOptions(
-      (prevOptions) => prevOptions.filter((option) => option !== filter.column),
-    );
-    setNumericFilters((prevState) => [...prevState, filter]);
-  }, []);
+  const addNumericFilter = useCallback(
+    (filter) => {
+      setColumnOptions((prevOptions) => prevOptions.filter((
+        option,
+      ) => option !== filter.column));
+      setNumericFilters((prevState) => [...prevState, filter]);
+    },
+    [setColumnOptions, setNumericFilters],
+  );
 
-  const removeNumericFilter = useCallback((filter) => {
-    if (filter === 'All') {
-      setColumnOptions(COLUMNSOPT_DEFAULT);
-      return setNumericFilters([]);
-    }
-
-    setColumnOptions((prevOptions) => [...prevOptions, filter.column]);
-    setNumericFilters((prevState) => (
-      prevState.filter((prevFilter) => prevFilter.column !== filter.column)));
-  }, []);
+  const removeNumericFilter = useCallback(
+    (filter) => {
+      if (filter === 'All') {
+        setColumnOptions(COLUMNSOPT_DEFAULT);
+        setNumericFilters([]);
+      } else {
+        setColumnOptions((prevOptions) => [...prevOptions, filter.column]);
+        setNumericFilters((prevState) => prevState.filter((
+          prevFilter,
+        ) => prevFilter.column !== filter.column));
+      }
+    },
+    [setColumnOptions, setNumericFilters],
+  );
 
   const planetsContext = {
     data,
