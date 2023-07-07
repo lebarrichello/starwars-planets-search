@@ -1,4 +1,4 @@
-import React, { useContext, useCallback, useReducer, useEffect } from 'react';
+import React, { useContext, useCallback, useEffect, useState } from 'react';
 import Context from '../context/Context';
 import './teste.css';
 
@@ -10,9 +10,7 @@ function Filters() {
     setFilterByName(value);
   }, [setFilterByName]);
 
-  const [numFiltersState, setNumericFilter] = useReducer((state, newState) => ({
-    ...state, ...newState,
-  }), {
+  const [numFiltersState, setNumFiltersState] = useState({
     column: 'population',
     comparison: 'maior que',
     value: '0',
@@ -23,16 +21,14 @@ function Filters() {
   }, [addNumericFilter, numFiltersState]);
 
   const handleChangeNumFilter = useCallback(({ target: { name, value } }) => {
-    setNumericFilter({ [name]: value });
+    setNumFiltersState((prevState) => ({ ...prevState, [name]: value }));
   }, []);
 
   useEffect(() => {
-    setNumericFilter({ column: columnOpt[0] });
+    setNumFiltersState((prevState) => ({ ...prevState, column: columnOpt[0] }));
   }, [columnOpt]);
 
-  const [sortOptions, setSortOptions] = useReducer((state, newState) => ({
-    ...state, ...newState,
-  }), {
+  const [sortOptions, setSortOptions] = useState({
     column: 'population',
     order: 'ASC',
   });
@@ -40,7 +36,7 @@ function Filters() {
   const { column, order } = sortOptions;
 
   const handleChangeASCDESC = useCallback(({ target: { name, value } }) => {
-    setSortOptions({ [name]: value });
+    setSortOptions((prevState) => ({ ...prevState, [name]: value }));
   }, []);
 
   const handleSort = useCallback(() => {
@@ -49,12 +45,9 @@ function Filters() {
 
   const removeAll = useCallback(() => removeNumericFilter('All'), [removeNumericFilter]);
 
-  const handleRemoveFilter = useCallback((index) => {
-    const cloneArray = [...numFiltersState];
-    console.log(numFiltersState);
-    cloneArray.splice(index, 1);
-    removeNumericFilter(cloneArray);
-  }, [numFiltersState, removeNumericFilter]);
+  const handleRemoveFilter = useCallback((filter) => {
+    removeNumericFilter(filter);
+  }, [removeNumericFilter]);
 
   return (
     <div className="containerFilters">
@@ -157,7 +150,7 @@ function Filters() {
         </button>
       </div>
       <div className="cor">
-        <span>cade a bagaca</span>
+        <span>Filtros pesquisados:</span>
         {numFilters.map((filter, index) => (
           <div key={ index } data-testid="filter">
             <span>
@@ -165,13 +158,18 @@ function Filters() {
               {filter.comparison}
               {filter.value}
             </span>
-            <button onClick={ () => handleRemoveFilter(index) }>𝙭</button>
+            <button
+              onClick={ () => handleRemoveFilter(filter) }
+            >
+              𝙭
+
+            </button>
           </div>
         ))}
+
       </div>
 
     </div>
   );
 }
-
 export default Filters;
