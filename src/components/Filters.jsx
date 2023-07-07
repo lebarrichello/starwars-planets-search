@@ -1,9 +1,16 @@
 import React, { useContext, useCallback, useReducer, useEffect } from 'react';
 import Context from '../context/Context';
+import AppliedFilters from './AppliedFilters';
 
 function Filters() {
   const { filters: { filterByName }, setFilterByName,
-    addNumericFilter, removeNumericFilter, columnOpt, sortPlanets } = useContext(Context);
+    addNumericFilter, columnOpt, sortPlanets } = useContext(Context);
+
+  const {
+    filters: { numericFilters = [] },
+    removeNumericFilter,
+  } = useContext(Context);
+  console.log(numericFilters);
 
   const handleChange = useCallback(({ target: { value } }) => {
     setFilterByName(value);
@@ -147,6 +154,10 @@ function Filters() {
           Ordenar
         </button>
       </div>
+      {numericFilters.map((filter) => (
+        <div key={ filter.column }>
+          <AppliedFilters filter={ filter } key={ filter.column } />
+        </div>))}
     </div>
   );
 }

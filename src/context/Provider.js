@@ -22,6 +22,7 @@ function Provider({ children }) {
   const [filterByName, setFilterByName] = useState('');
   const [numFilters, setNumericFilters] = useState([]);
   const [columnOpt, setColumnOptions] = useState(COLUMNSOPT_DEFAULT);
+
   useEffect(() => {
     const fetchPlanets = async () => {
       const planetsData = await fetchPlanetsAPI();
