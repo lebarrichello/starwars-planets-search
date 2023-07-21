@@ -11,7 +11,7 @@ function Table() {
     <div className="container__table">
       <Filters />
       <div>
-        <table>
+        <table className="table">
           <thead>
             <tr>
               { tbColumns.map((column) => (
@@ -25,6 +25,7 @@ function Table() {
                 {
                   Object.entries(planet).map(([column, value]) => (
                     <td
+                      data-th={ column }
                       key={ column }
                     >
                       {value}

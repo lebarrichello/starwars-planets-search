@@ -1,7 +1,8 @@
 .container__table {
   background-color: #1e1e1e;
+  margin-left: 5%;
+  margin-right: 5%;
   overflow-x: auto;
-  width: 100%;
 }
 
 table {
@@ -20,6 +21,10 @@ thead {
   background-color: #0f0f0f;
 }
 
+tr:nth-child( even ) {
+  background: hsl(0, 0%, 27%);
+}
+
 
 @media screen and ( max-width : 768px ) {
 
@@ -27,18 +32,16 @@ thead {
     display: none;
   }
 
-  tbody, tr, td {
-    display: block;
-  }
-
   td {
-    border-bottom: 1px solid #ddd;
+    display: grid;
+    gap: 5rem;
+    grid-template-columns: 7ch auto;
+    text-align: start;
   }
 
   td:before {
-    content: attr(data-label);
-    float: left;
-    font-weight: 700;
-    text-transform: uppercase;
+    color: yellow;
+    content: attr(data-th) ':';
   }
+
 }

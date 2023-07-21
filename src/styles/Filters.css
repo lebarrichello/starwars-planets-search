@@ -19,7 +19,6 @@ input, select {
   width: 100%; /* 100% de largura para preencher o contêiner */
 }
 
-/* Estilize o placeholder do input */
 input::placeholder {
   color: hsl(0, 0%, 83%);
 }
