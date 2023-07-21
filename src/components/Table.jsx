@@ -1,16 +1,17 @@
 import React, { useContext } from 'react';
 import Context from '../context/Context';
 import Filters from './Filters';
+import '../styles/Table.css';
 
 function Table() {
   const { tbColumns } = useContext(Context);
   const { data } = useContext(Context);
 
   return (
-    <div className="containerTable">
+    <div className="container__table">
       <Filters />
       <div>
-        <table className="rTable">
+        <table>
           <thead>
             <tr>
               { tbColumns.map((column) => (

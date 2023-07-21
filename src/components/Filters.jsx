@@ -1,6 +1,8 @@
 import React, { useContext, useCallback, useEffect, useState } from 'react';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { LuFilter, LuFilterX } from 'react-icons/lu';
 import Context from '../context/Context';
-import './teste.css';
+import '../styles/Filters.css';
 
 function Filters() {
   const { filters: { filterByName, numFilters = [] }, setFilterByName,
@@ -50,17 +52,20 @@ function Filters() {
   }, [removeNumericFilter]);
 
   return (
-    <div className="containerFilters">
-      <div className="filterNamecont">
+    <div className="container__filters">
+
+      <div className="filter__name">
         <input
           type="text"
           label="Filtrar por nome"
           data-testid="name-filter"
+          placeholder="Filtrar por nome"
           onChange={ handleChange }
           value={ filterByName }
         />
       </div>
-      <div className="filterNumcont">
+
+      <div className="filter_numeric">
         <select
           label="Coluna"
           data-testid="column-filter"
@@ -92,20 +97,26 @@ function Filters() {
           onChange={ handleChangeNumFilter }
           value={ numFiltersState.value }
         />
-        <button
-          type="button"
-          data-testid="button-filter"
-          onClick={ addNumFilterContext }
-        >
-          Filtrar
-        </button>
-        <button
-          type="button"
-          data-testid="button-remove-filters"
-          onClick={ removeAll }
-        >
-          Remover Filtros
-        </button>
+        <div className="buttons_filter">
+          <button
+            type="button"
+            data-testid="button-filter"
+            onClick={ addNumFilterContext }
+          >
+            <LuFilter className="icon" />
+          </button>
+
+          <button
+            type="button"
+            data-testid="button-remove-filters"
+            onClick={ removeAll }
+          >
+            <LuFilterX className="icon" />
+          </button>
+        </div>
+      </div>
+
+      <div className="filter__order">
         <select
           name="column"
           data-testid="column-sort"
@@ -119,7 +130,7 @@ function Filters() {
           <option value="surface_water">Surface Water</option>
         </select>
 
-        <label htmlFor="column-sort-input-asc">
+        <div className="radio-wrapper">
           <input
             type="radio"
             name="order"
@@ -127,10 +138,11 @@ function Filters() {
             data-testid="column-sort-input-asc"
             checked={ order === 'ASC' }
             onChange={ handleChangeASCDESC }
+            className="custom-radio"
+            id="column-sort-input-asc"
           />
-          Ascendente
-        </label>
-        <label htmlFor="column-sort-input-desc">
+          <label htmlFor="column-sort-input-asc">Asc</label>
+
           <input
             type="radio"
             name="order"
@@ -138,9 +150,12 @@ function Filters() {
             data-testid="column-sort-input-desc"
             checked={ order === 'DESC' }
             onChange={ handleChangeASCDESC }
+            className="custom-radio"
+            id="column-sort-input-desc"
           />
-          Descendente
-        </label>
+          <label htmlFor="column-sort-input-desc">Dec</label>
+        </div>
+
         <button
           type="button"
           data-testid="column-sort-button"
@@ -149,19 +164,24 @@ function Filters() {
           Ordenar
         </button>
       </div>
-      <div className="cor">
+
+      <div className="filters__applied">
         <span>Filtros pesquisados:</span>
         {numFilters.map((filter, index) => (
           <div key={ index } data-testid="filter">
             <span>
               {filter.column}
+              __
               {filter.comparison}
+              __
               {filter.value}
             </span>
+
             <button
+              className="close__icon"
               onClick={ () => handleRemoveFilter(filter) }
             >
-              𝙭
+              <AiOutlineCloseCircle className="icon" />
 
             </button>
           </div>

@@ -1,0 +1,44 @@
+.container__table {
+  background-color: #1e1e1e;
+  overflow-x: auto;
+  width: 100%;
+}
+
+table {
+  border-collapse: collapse;
+  text-align: left;
+  width: 100%;
+}
+
+th, td {
+  border-bottom: 1px solid hsl(0, 0%, 83%);
+  padding: 10px;
+  text-align: center;
+}
+
+thead {
+  background-color: #0f0f0f;
+}
+
+
+@media screen and ( max-width : 768px ) {
+
+  thead {
+    display: none;
+  }
+
+  tbody, tr, td {
+    display: block;
+  }
+
+  td {
+    border-bottom: 1px solid #ddd;
+  }
+
+  td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+}

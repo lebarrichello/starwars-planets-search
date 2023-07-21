@@ -1,0 +1,121 @@
+/* stylelint-disable max-line-length */
+.container__filters {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 10px;
+}
+
+/* Estilos padrão para inputs e selects */
+input, select {
+  background-color: transparent;
+  border: 1px solid hsl(0, 0%, 83%);
+  border-radius: 6px;
+  box-sizing: border-box; /* Evita que as bordas aumentem a largura do elemento */
+  color: white;
+  outline: none;
+  padding: 10px;
+  width: 100%; /* 100% de largura para preencher o contêiner */
+}
+
+/* Estilize o placeholder do input */
+input::placeholder {
+  color: hsl(0, 0%, 83%);
+}
+
+select:optional {
+  background-color: transparent;
+}
+
+/* Estilos para o select quando está em foco */
+select:focus {
+  border: 2px solid yellow;
+}
+
+/* Estilos para a opção do select */
+select option {
+  color: black;
+}
+
+/* Estilos para os radio buttons personalizados */
+.custom-radio {
+  display: none;
+}
+
+.radio-wrapper label {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 5px;
+  padding: 8px;
+}
+
+/* Estilos para os radio buttons personalizados quando estão marcados */
+.custom-radio:checked + label {
+  background-color: #ffff007e;
+  border: 1px solid yellow;
+  color: yellow;
+}
+
+/* Estilos para os botões */
+.buttons_filter, .radio-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+button {
+  background-color: transparent;
+  border: 1px solid yellow;
+  border-radius: 6px;
+  color: yellow;
+  font-weight: 600;
+  padding: 10px;
+  text-transform: uppercase;
+}
+
+button:hover {
+  background-color: #ffff007e;
+}
+
+.close__icon {
+  border: none;
+  justify-content: flex-end;
+  margin-left: 5px;
+  padding: 2px;
+}
+
+.icon {
+  width: 23px;
+}
+
+/* Estilos para a seção de filtros numéricos e ordenação */
+.filter_numeric, .filter__order {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+/* Estilos para a seção de filtros aplicados */
+.filters__applied {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Estilos responsivos para dispositivos móveis */
+
+@media screen and ( max-width : 767px ) {
+
+  .filter_numeric, .filter__order, .filters__applied {
+    flex-direction: column; /* Empilha os elementos verticalmente */
+    gap: 10px; /* Espaçamento entre os elementos */
+
+  }
+
+  .filter__name input, .filter__numeric input, .filter__numeric select .filter__order select {
+    width: 100%; /* Define a largura dos elementos como 100% */
+  }
+}
