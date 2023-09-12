@@ -2,6 +2,8 @@
 
 Projeto desenvolvido no módulo de Front-End do curso de desenvolvimento web da Trybe
 
+![mobile](https://github.com/lebarrichello/starwars-planets-search/assets/42211040/9cfd5e69-19d0-4edb-a9be-a5fb778098d9)
+
 <p>Acesse o projeto em produção <a href="https://starwars-planets-search-fawn.vercel.app/" target="_blank">clicando aqui</a></p>
 
 ## 🎯 Objetivo
