@@ -1,8 +1,19 @@
 .container__table {
   background-color: #1e1e1e;
-  margin-left: 5%;
-  margin-right: 5%;
+  margin: 5%;
   overflow-x: auto;
+  padding: 8px;
+}
+
+.container__table::-webkit-scrollbar {
+  background-color: #1e1e1e;
+  border-radius: 30px;
+}
+
+.container__table::-webkit-scrollbar-thumb {
+  background-color: black;
+  border-radius: 5px;
+  border: 3px solid yellow;
 }
 
 table {
